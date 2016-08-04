@@ -19,15 +19,9 @@ oc new-app --file=openshift-template.yaml --param=APP_HOSTNAME_SUFFIX=.laravelap
 
 ### Using Docker
 
- 1. First run a broker for Celery. I use RabbitMQ (https://www.rabbitmq.com/).
-    ```
-    docker run -d -P --name=rabbitmq rabbitmq:3-management 
-    ```
-
- 2. Run the Django image.
-    ```
-    docker run -d -P --link rabbitmq:rabbitmq --name=laravelapp astrolox/ubuntu-16-laravel-application
-    ```
+```
+docker run -d -P --link rabbitmq:rabbitmq --name=laravelapp astrolox/ubuntu-16-laravel-application
+```
 
 ## Environment variables
 
