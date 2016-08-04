@@ -33,8 +33,6 @@ RUN \
     ln -sf /var/www/html/artisan /usr/bin/artisan && \
     chmod 755 /var/www/html/artisan && \
     touch /var/www/html/storage/logs/laravel.log && \
-    chmod -R 777 /var/www/html/storage/ && \
-    chown -R www-data:www-data /var/www/html && \
     rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php && \
     find /var/www/html/ -type d -exec chmod 755 {} + && \
     find /var/www/html/ -type d -exec chmod ug+s {} + && \
