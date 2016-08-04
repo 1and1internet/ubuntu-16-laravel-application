@@ -37,7 +37,4 @@ RUN \
     chown -R www-data:www-data /var/www/html && \
     rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php
 WORKDIR /var/www/html
-ONBUILD RUN \
-    php artisan optimize && \
-    php artisan key:generate && \
-    php artisan cache:clear
+ONBUILD RUN php artisan key:generate
