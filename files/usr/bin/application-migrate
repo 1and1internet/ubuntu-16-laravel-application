@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+echo "Application Migrate"
+
+php artisan migrate:status
+echo ""
+echo ""
+
+php artisan migrate --force
+echo ""
+echo ""
+
+php artisan db:seed
+echo ""
+echo ""
+
+php artisan cache:clear
+echo ""
+echo ""
+
+php artisan migrate:status
+echo ""
+echo ""
+
+rm /etc/supervisor/conf.d/*.conf
+exec /init/supervisord

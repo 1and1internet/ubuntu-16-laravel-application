@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+echo "Application Worker"
+
+if [ -z "$APP_WORKER_QUEUES" ]; then
+    echo "Application worker queues not specified"
+    exit 1
+fi
+
+if [ -z "$1" ]; then
+    # No command line arguments
+
+    rm /etc/supervisor/conf.d/nginx.conf
+    rm /etc/supervisor/conf.d/logs.conf
+    rm /etc/supervisor/conf.d/scheduler.conf
+
+    exec /init/supervisord
+else
+    # Execute our queue worker
+    exec php artisan queue:listen -v --timeout=${APP_WORKER_TIMEOUT} --queue=${APP_WORKER_QUEUES}
+fi

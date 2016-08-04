@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+echo "Application Web Interface"
+
+# No command line arguments
+
+rm /etc/supervisor/conf.d/worker.conf
+rm /etc/supervisor/conf.d/scheduler.conf
+
+exec /init/supervisord
