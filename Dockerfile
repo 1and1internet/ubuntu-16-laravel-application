@@ -35,6 +35,12 @@ RUN \
     touch /var/www/html/storage/logs/laravel.log && \
     chmod -R 777 /var/www/html/storage/ && \
     chown -R www-data:www-data /var/www/html && \
-    rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php
+    rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php && \
+    find /var/www/html/ -type d -exec chmod 755 {} + && \
+    find /var/www/html/ -type d -exec chmod ug+s {} + && \
+    find /var/www/html/ -type f -exec chmod 644 {} + && \
+    chown -R www-data:www-data /var/www/html/ && \
+    chmod -R 777 /var/www/html/storage && \
+    chmod -R 777 /var/www/html/bootstrap/cache/
 WORKDIR /var/www/html
 ONBUILD RUN php artisan key:generate
