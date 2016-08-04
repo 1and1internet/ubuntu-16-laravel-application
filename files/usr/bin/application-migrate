@@ -10,10 +10,6 @@ php artisan migrate --force
 echo ""
 echo ""
 
-php artisan db:seed
-echo ""
-echo ""
-
 php artisan cache:clear
 echo ""
 echo ""
