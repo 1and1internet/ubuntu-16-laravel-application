@@ -14,6 +14,7 @@ A Docker image to use as a basis for Docker contained Laravel 5 applications bas
 ## Creating your own application image
 
  1. Create a Dockerfile in your project folder
+
 	```
 	FROM astrolox/ubuntu-16-laravel-application
 	COPY src/ ./
@@ -27,15 +28,21 @@ A Docker image to use as a basis for Docker contained Laravel 5 applications bas
 		php artisan optimize && \
 		application-set-file-permissions
 	```
+
  2. Place your laravel application code in ./src/
+
 	```
 	composer create-project --prefer-dist laravel/laravel ./src/
 	```
+
  3. Build your docker image
+
 	```
 	docker build -t mylaravelapp .
 	```
+
  4. See it running
+
 	```
 	docker run -d -P mylaravelapp
 	```
