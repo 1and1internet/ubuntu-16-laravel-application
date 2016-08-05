@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+COMPONENT=$1
+
+if [ -z "$COMPONENT" ]; then
+    echo "ERROR: No component name passed to application-component-enable"
+    exit 1
+fi
+
+if [ "$COMPONENT" = "all" ]; then
+    echo "Enabling all application components"
+    pushd /etc/supervisor/conf.d.template/
+    for FILENAME in *.conf; do 
+        ln -s /etc/supervisor/conf.d.template/${FILENAME} /etc/supervisor/conf.d/${FILENAME}
+    done
+    popd
+
+elif [ "$COMPONENT" = "web" ]; then
+    echo "Enabling application web component"
+    ln -s /etc/supervisor/conf.d.template/logs.conf /etc/supervisor/conf.d/logs.conf 
+    ln -s /etc/supervisor/conf.d.template/nginx.conf /etc/supervisor/conf.d/nginx.conf
+
+else
+    echo "Enabling application ${COMPONENT} component"
+    ln -s /etc/supervisor/conf.d.template/${COMPONENT}.conf /etc/supervisor/conf.d/${COMPONENT}.conf
+
+fi

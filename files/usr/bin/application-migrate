@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 echo "Application Migrate"
+#
+# To run just the application migrator in its own container use
+# $ docker run ubuntu-16-laravel-application application-migrate
+#
 
 php artisan migrate:status
 echo ""
@@ -18,5 +22,4 @@ php artisan migrate:status
 echo ""
 echo ""
 
-rm /etc/supervisor/conf.d/*.conf
 exec /init/supervisord

@@ -20,7 +20,9 @@ RUN \
     sed -i -e 's/^access_log .*;$/access_log \/var\/log\/access\.log/g' /etc/nginx/sites-enabled/site.conf && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     sed -i -e 's/^error_log .*;$/error_log stderr;/g' /etc/nginx/sites-enabled/site.conf && \
-    chmod -R 777 /etc/supervisor/conf.d /etc/supervisor/conf.d/* && \
+    mv /etc/supervisor/conf.d /etc/supervisor/conf.d.template && \
+    mkdir -p /etc/supervisor/conf.d && \
+    chmod -R 777 /etc/supervisor/conf* && \
     chmod -R 755 /hooks/supervisord-pre.d/* && \
     mkdir -p /var/www/html && \
     composer create-project \
@@ -36,4 +38,5 @@ RUN \
     rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php && \
     application-set-file-permissions
 WORKDIR /var/www/html
+CMD ['application-all']
 ONBUILD RUN php artisan key:generate

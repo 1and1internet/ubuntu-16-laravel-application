@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+echo "Application All In One"
+#
+# To run everything in a single container you don't need to specify anything
+#  because this script is the default, so just use
+# $ docker run ubuntu-16-laravel-application
+#
+
+# enable everything
+application-component-enable all
+
+# do the database migration (which will then start everything else)
+exec /usr/bin/application-migrate

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 echo "Application Web Interface"
+#
+# To run just the application web interface in its own container use
+# $ docker run ubuntu-16-laravel-application application-web
+#
 
-# No command line arguments
-
-rm /etc/supervisor/conf.d/worker.conf
-rm /etc/supervisor/conf.d/scheduler.conf
-
+application-component-enable web
 exec /init/supervisord
