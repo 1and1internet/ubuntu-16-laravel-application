@@ -16,11 +16,19 @@ if [ "$COMPONENT" = "all" ]; then
     popd
 
 elif [ "$COMPONENT" = "web" ]; then
+    if [ ! -e /etc/supervisor/conf.d.template/logs.conf ] or [ ! -e /etc/supervisor/conf.d.template/nginx.conf ]; then
+        echo "Not able to enable non existent application component web - maybe it was removed?"
+        exit 3
+    fi
     echo "Enabling application web component"
     ln -s /etc/supervisor/conf.d.template/logs.conf /etc/supervisor/conf.d/logs.conf 
     ln -s /etc/supervisor/conf.d.template/nginx.conf /etc/supervisor/conf.d/nginx.conf
 
 else
+    if [ ! -e /etc/supervisor/conf.d.template/${COMPONENT}.conf ]; then
+        echo "Not able to enable non existent application component ${COMPONENT} - maybe it was removed?"
+        exit 3
+    fi
     echo "Enabling application ${COMPONENT} component"
     ln -s /etc/supervisor/conf.d.template/${COMPONENT}.conf /etc/supervisor/conf.d/${COMPONENT}.conf
 
