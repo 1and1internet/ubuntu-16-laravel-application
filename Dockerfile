@@ -38,5 +38,5 @@ RUN \
     rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php && \
     application-set-file-permissions
 WORKDIR /var/www/html
-CMD application-all
+CMD ["application-all"]
 ONBUILD RUN php artisan key:generate
