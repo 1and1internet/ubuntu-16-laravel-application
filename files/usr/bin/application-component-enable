@@ -9,11 +9,11 @@ fi
 
 if [ "$COMPONENT" = "all" ]; then
     echo "Enabling all application components"
-    pushd /etc/supervisor/conf.d.template/
+    pushd /etc/supervisor/conf.d.template/ >> /dev/null
     for FILENAME in *.conf; do 
         ln -s /etc/supervisor/conf.d.template/${FILENAME} /etc/supervisor/conf.d/${FILENAME}
     done
-    popd
+    popd >> /dev/null
 
 elif [ "$COMPONENT" = "web" ]; then
     if [ ! -e /etc/supervisor/conf.d.template/logs.conf ] or [ ! -e /etc/supervisor/conf.d.template/nginx.conf ]; then
