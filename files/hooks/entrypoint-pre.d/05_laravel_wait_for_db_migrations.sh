@@ -9,7 +9,7 @@ if [[ -z "${WAIT_FOR_DB_MIGRATIONS}" ]] || [[ "${WAIT_FOR_DB_MIGRATIONS}" = "pro
 	exit 0
 fi
 
-php artisan --no-ansi --no-interaction list | grep migrate:monitor
+php artisan --no-ansi --no-interaction list | grep migrate:monitor 2>&1 > /dev/null
 if [[ $? -ne 0 ]]; then
 	echo "Unable to wait for migrations before starting"
 	echo "This Laravel Application does not support the artisan command migrate:monitor"
