@@ -17,9 +17,11 @@ RUN \
     rm -rf /var/www && \
     rm -rf /var/log/nginx/*.log && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
-    sed -i -e 's/^access_log .*;$/access_log \/var\/log\/access\.log/g' /etc/nginx/sites-enabled/site.conf && \
+    ln -sf /dev/stdout /var/log/php7.0-fpm.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
-    sed -i -e 's/^error_log .*;$/error_log stderr;/g' /etc/nginx/sites-enabled/site.conf && \
+    sed -i -e 's/access_log .*;$/access_log \/var\/log\/nginx\/access\.log/g' /etc/nginx/sites-enabled/site.conf && \
+    sed -i -e 's/error_log .*;$/error_log stderr;/g' /etc/nginx/sites-enabled/site.conf && \
+    chmod 666 /var/log/php7.0-fpm.log /var/log/nginx/*.log && \
     mv /etc/supervisor/conf.d /etc/supervisor/conf.d.template && \
     mkdir -p /etc/supervisor/conf.d && \
     chmod -R 777 /etc/supervisor/conf* && \
@@ -35,6 +37,7 @@ RUN \
     ln -sf /var/www/html/artisan /usr/bin/artisan && \
     chmod 755 /var/www/html/artisan && \
     touch /var/www/html/storage/logs/laravel.log && \
+    chmod 666 /var/www/html/storage/logs/laravel.log && \
     rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php && \
     application-set-file-permissions
 WORKDIR /var/www/html
