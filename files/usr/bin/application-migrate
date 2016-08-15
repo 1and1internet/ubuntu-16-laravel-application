@@ -8,14 +8,16 @@ echo "Application Migrate"
 
 # Get the initial status so that it can be logged
 # - Retry a few times in case we started before the database container
-LIMIT=10
+LIMIT=20
+COUNT=0
 false
 while [[ $? -ne 0 ]]; do
-	LIMIT=$[$LIMIT-1]
-	if [[ $LIMIT -le 0 ]]; then
+	COUNT=$[$COUNT+1]
+	if [[ $COUNT -gt $LIMIT ]]; then
 		echo "Unable to get migration status after several attempts - giving up (is the database ok?)"
 		exit 5
 	fi
+	sleep $COUNT
 	php artisan --no-ansi --no-interaction migrate:status
 done
 

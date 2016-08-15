@@ -15,14 +15,16 @@ if [[ $? -ne 0 ]]; then
 	echo "This Laravel Application does not support the artisan command migrate:monitor"
 	exit 2
 else
-	LIMIT=10
+	LIMIT=20
+	COUNT=0
 	false
 	while [[ $? -ne 0 ]]; do
-		LIMIT=$[$LIMIT-1]
-		if [[ $LIMIT -le 0 ]]; then
+		COUNT=$[$COUNT+1]
+		if [[ $COUNT -gt $LIMIT ]]; then
 			echo "Giving up waiting for database migrations"
 			exit 1
 		fi
+		sleep $COUNT
 		php artisan --no-ansi --no-interaction migrate:monitor
 	done
 fi
