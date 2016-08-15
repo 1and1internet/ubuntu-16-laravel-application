@@ -15,6 +15,7 @@ elif [ "$COMPONENT" = "web" ]; then
     echo "Disabling application web component"
     rm -f /etc/supervisor/conf.d/logs.conf
     rm -f /etc/supervisor/conf.d/nginx.conf
+    rm -f /etc/supervisor/conf.d/php-fpm.conf
 
 else
     echo "Disabling application ${COMPONENT} component"

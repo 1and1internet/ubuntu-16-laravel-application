@@ -15,6 +15,7 @@ elif [ "$COMPONENT" = "web" ]; then
     echo "Removing application web component"
     rm -f /etc/supervisor/conf.d.template/logs.conf
     rm -f /etc/supervisor/conf.d.template/nginx.conf
+    rm -f /etc/supervisor/conf.d.template/php-fpm.conf
 
 else
     echo "Removing application ${COMPONENT} component"

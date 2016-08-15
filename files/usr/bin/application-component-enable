@@ -23,6 +23,7 @@ elif [ "$COMPONENT" = "web" ]; then
     echo "Enabling application web component"
     ln -s /etc/supervisor/conf.d.template/logs.conf /etc/supervisor/conf.d/logs.conf 
     ln -s /etc/supervisor/conf.d.template/nginx.conf /etc/supervisor/conf.d/nginx.conf
+    ln -s /etc/supervisor/conf.d.template/php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
 
 else
     if [ ! -e /etc/supervisor/conf.d.template/${COMPONENT}.conf ]; then
