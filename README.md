@@ -13,8 +13,9 @@ A Docker image to use as a basis for Docker contained Laravel 5 applications bas
 
 ## Creating your own application image
 
- 1. Create a Dockerfile in your project folder
+ 1. Create a Dockerfile in your project folder.
 
+	Basic example:
 	```
 	FROM astrolox/ubuntu-16-laravel-application
 	COPY src/ ./
@@ -25,7 +26,33 @@ A Docker image to use as a basis for Docker contained Laravel 5 applications bas
 			--no-interaction \
 			--no-progress \
 			--prefer-dist && \
-		php artisan optimize && \
+		php artisan --no-ansi --no-interaction optimize && \
+		application-set-file-permissions
+	```
+
+	A more complex example of what you might want your Dockerfile to look like:
+	```
+	FROM astrolox/ubuntu-16-laravel-application
+	# Copy in various additional required files (like init scripts).
+	COPY files /
+	# Install dependencies via composer (these don't change often during development)
+	COPY src/composer* ./
+	RUN \
+		composer install \
+			--no-ansi \
+			--no-dev \
+			--no-interaction \
+			--no-progress \
+			--prefer-dist
+	# Copy in the application source code
+	COPY src/ ./
+	# Copy in the default configuration
+	COPY default.env ./.env
+	# Perform additional setup required for the application
+	RUN \
+		application-component-remove scheduler && \
+		application-component-remove worker && \
+		php artisan --no-ansi --no-interaction optimize && \
 		application-set-file-permissions
 	```
 
