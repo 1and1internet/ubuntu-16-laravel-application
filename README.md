@@ -68,3 +68,4 @@ All configuration is via environment variables.
 * Both Docker and OpenShift
   * ``APP_WORKER_QUEUES`` - defaults to high,low
   * ``APP_WORKER_TIMEOUT`` - defaults to 180
+  * ``WAIT_FOR_DB_MIGRATIONS`` - triggers early call to php artisan migrate:monitor (defaults off)

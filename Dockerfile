@@ -5,7 +5,8 @@ COPY files /
 ENV \
     DOCUMENT_ROOT=html/public \
     APP_WORKER_QUEUES=high,low \
-    APP_WORKER_TIMEOUT=180 
+    APP_WORKER_TIMEOUT=180 \
+    WAIT_FOR_DB_MIGRATIONS=prompt
 RUN \
     apt-get update -q && \
     apt-get install -q -o Dpkg::Options::=--force-confdef -y php7.0-bcmath php7.0-gmp php7.0-json php7.0-ldap php7.0-recode php7.0-pspell php7.0-soap php7.0-bz2 && \

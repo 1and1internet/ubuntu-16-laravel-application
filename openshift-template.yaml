@@ -37,7 +37,22 @@ objects:
               imagePullPolicy: Always
               image: "astrolox/ubuntu-16-laravel-application:latest"
               args: ["application-worker"]
-              env: ~
+              env:
+                -
+                  name: DB_HOST
+                  value: "${APP_NAME}-db"
+                -
+                  name: DB_DATABASE
+                  value: "${APP_DB_DATABASE}"
+                -
+                  name: DB_USERNAME
+                  value: "${APP_DB_USER}"
+                -
+                  name: DB_PASSWORD
+                  value: "${APP_DB_PASSWORD}"
+                -
+                  name: WAIT_FOR_DB_MIGRATIONS
+                  value: "prompt"
           restartPolicy: Always
           securityContext: 
             runAsUser: 10999
@@ -84,7 +99,22 @@ objects:
               imagePullPolicy: Always
               image: "astrolox/ubuntu-16-laravel-application:latest"
               args: ["application-cron"]
-              env: ~
+              env:
+                -
+                  name: DB_HOST
+                  value: "${APP_NAME}-db"
+                -
+                  name: DB_DATABASE
+                  value: "${APP_DB_DATABASE}"
+                -
+                  name: DB_USERNAME
+                  value: "${APP_DB_USER}"
+                -
+                  name: DB_PASSWORD
+                  value: "${APP_DB_PASSWORD}"
+                -
+                  name: WAIT_FOR_DB_MIGRATIONS
+                  value: "prompt"
           restartPolicy: Always
           securityContext: 
             runAsUser: 10999
@@ -140,7 +170,22 @@ objects:
                   name: "https"
                   containerPort: 8443
                   protocol: TCP
-              env: ~
+              env:
+                -
+                  name: DB_HOST
+                  value: "${APP_NAME}-db"
+                -
+                  name: DB_DATABASE
+                  value: "${APP_DB_DATABASE}"
+                -
+                  name: DB_USERNAME
+                  value: "${APP_DB_USER}"
+                -
+                  name: DB_PASSWORD
+                  value: "${APP_DB_PASSWORD}"
+                -
+                  name: WAIT_FOR_DB_MIGRATIONS
+                  value: "prompt"
           restartPolicy: Always
           securityContext: 
             runAsUser: 10999
@@ -230,7 +275,22 @@ objects:
               imagePullPolicy: Always
               image: "astrolox/ubuntu-16-laravel-application:latest"
               args: ["application-migrate"]
-              env: ~
+              env:
+                -
+                  name: DB_HOST
+                  value: "${APP_NAME}-db"
+                -
+                  name: DB_DATABASE
+                  value: "${APP_DB_DATABASE}"
+                -
+                  name: DB_USERNAME
+                  value: "${APP_DB_USER}"
+                -
+                  name: DB_PASSWORD
+                  value: "${APP_DB_PASSWORD}"
+                -
+                  name: WAIT_FOR_DB_MIGRATIONS
+                  value: "false"
           restartPolicy: Always
           securityContext: 
             runAsUser: 10999
