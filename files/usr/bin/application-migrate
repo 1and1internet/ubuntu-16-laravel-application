@@ -6,19 +6,19 @@ echo "Application Migrate"
 # $ docker run ubuntu-16-laravel-application application-migrate
 #
 
-php artisan migrate:status
+php artisan --no-ansi --no-interaction migrate:status
 echo ""
 echo ""
 
-php artisan migrate --force
+php artisan --no-ansi --no-interaction migrate --force
 echo ""
 echo ""
 
-php artisan cache:clear
+php artisan --no-ansi --no-interaction cache:clear
 echo ""
 echo ""
 
-php artisan migrate:status
+php artisan --no-ansi --no-interaction migrate:status
 echo ""
 echo ""
 

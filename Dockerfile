@@ -43,4 +43,4 @@ RUN \
     application-set-file-permissions
 WORKDIR /var/www/html
 CMD ["application-all"]
-ONBUILD RUN php artisan key:generate
+ONBUILD RUN php artisan --no-ansi --no-interaction key:generate

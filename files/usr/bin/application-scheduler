@@ -19,7 +19,7 @@ else
     # Execute our scheduler
     while :
     do
-        php artisan schedule:run --no-ansi -q &
+        php artisan --no-ansi --no-interaction schedule:run -q &
         sleep 60
     done
 fi
