@@ -22,6 +22,7 @@ RUN \
     sed -i -e 's/access_log .*;$/access_log \/var\/log\/nginx\/access\.log/g' /etc/nginx/sites-enabled/site.conf && \
     sed -i -e 's/error_log .*;$/error_log stderr;/g' /etc/nginx/sites-enabled/site.conf && \
     chmod 666 /var/log/php7.0-fpm.log /var/log/nginx/*.log && \
+    sed -i -e 's/;clear_env = no/clear_env = no/g' /etc/php/7.0/fpm/pool.d/*.conf && \
     mv /etc/supervisor/conf.d /etc/supervisor/conf.d.template && \
     mkdir -p /etc/supervisor/conf.d && \
     chmod -R 777 /etc/supervisor/conf* && \
