@@ -2,16 +2,16 @@
 
 COMPONENT=$1
 
-if [ -z "$COMPONENT" ]; then
+if [[ -z "$COMPONENT" ]]; then
     echo "ERROR: No component name passed to application-component-disable"
     exit 1
 fi
 
-if [ "$COMPONENT" = "all" ]; then
+if [[ "$COMPONENT" = "all" ]]; then
     echo "Disabling all application components"
     rm -f /etc/supervisor/conf.d/*
 
-elif [ "$COMPONENT" = "web" ]; then
+elif [[ "$COMPONENT" = "web" ]]; then
     echo "Disabling application web component"
     rm -f /etc/supervisor/conf.d/logs.conf
     rm -f /etc/supervisor/conf.d/nginx.conf

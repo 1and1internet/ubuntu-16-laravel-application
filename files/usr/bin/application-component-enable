@@ -2,12 +2,12 @@
 
 COMPONENT=$1
 
-if [ -z "$COMPONENT" ]; then
+if [[ -z "$COMPONENT" ]]; then
     echo "ERROR: No component name passed to application-component-enable"
     exit 1
 fi
 
-if [ "$COMPONENT" = "all" ]; then
+if [[ "$COMPONENT" = "all" ]]; then
     echo "Enabling all application components"
     pushd /etc/supervisor/conf.d.template/ >> /dev/null
     for FILENAME in *.conf; do 
@@ -15,8 +15,8 @@ if [ "$COMPONENT" = "all" ]; then
     done
     popd >> /dev/null
 
-elif [ "$COMPONENT" = "web" ]; then
-    if [ ! -e /etc/supervisor/conf.d.template/logs.conf ] or [ ! -e /etc/supervisor/conf.d.template/nginx.conf ]; then
+elif [[ "$COMPONENT" = "web" ]]; then
+    if [[ ! -e /etc/supervisor/conf.d.template/logs.conf ]] or [[ ! -e /etc/supervisor/conf.d.template/nginx.conf ]]; then
         echo "Not able to enable non existent application component web - maybe it was removed?"
         exit 3
     fi
@@ -26,7 +26,7 @@ elif [ "$COMPONENT" = "web" ]; then
     ln -s /etc/supervisor/conf.d.template/php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
 
 else
-    if [ ! -e /etc/supervisor/conf.d.template/${COMPONENT}.conf ]; then
+    if [[ ! -e /etc/supervisor/conf.d.template/${COMPONENT}.conf ]]; then
         echo "Not able to enable non existent application component ${COMPONENT} - maybe it was removed?"
         exit 3
     fi
