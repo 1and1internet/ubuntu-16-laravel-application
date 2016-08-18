@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+echo "Application Migrator"
+#
+# To run just the application migrator in its own container use
+# $ docker run ubuntu-16-laravel-application application-migrate
+#
+
+# Get the initial status so that it can be logged
+# - Retry a few times in case we started before the database container
+LIMIT=20
+COUNT=0
+false
+while [[ $? -ne 0 ]]; do
+	COUNT=$[$COUNT+1]
+	if [[ $COUNT -gt $LIMIT ]]; then
+		echo "Unable to get migration status after several attempts - giving up (is the database ok?)"
+		exit 5
+	fi
+	sleep $COUNT
+	php artisan --no-ansi --no-interaction migrate:status
+done
+
+# Fail on any error after this point
+set -o errexit
+
+echo ""
+echo ""
+
+# Do the migration
+php artisan --no-ansi --no-interaction migrate --force
+echo ""
+echo ""
+
+# Clear the cache
+php artisan --no-ansi --no-interaction cache:clear
+echo ""
+echo ""
+
+# Report the new status
+php artisan --no-ansi --no-interaction migrate:status
+echo ""
+echo ""
+
+# Wait to be told that we need to start again
+exec /init/supervisord
