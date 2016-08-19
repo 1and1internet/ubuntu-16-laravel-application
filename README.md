@@ -78,10 +78,16 @@ For configuring passwords, etc, I recommend environment variables via the --env-
 
 ## Deploying to OpenShift
 
-Modify the Image names in the openshift-template.yaml.
-```
-oc new-app --file=openshift-template.yaml --param=APP_HOSTNAME_SUFFIX=.laravelapp.example.com
-```
+ 1. Modify the openshift-template file.
+    - Change the image names
+    - Remove any of the components which are you not using
+    - Modify run as user ID numbers
+    - Modify the volume configuration to match that required by your openshift cluster
+
+ 2. Run the new-app command
+	```
+	oc new-app --file=openshift-template.yaml --param=APP_HOSTNAME_SUFFIX=.laravelapp.example.com
+	```
 
 ## Environment variables
 
