@@ -6,7 +6,7 @@ echo "Application Scheduler"
 # $ docker run ubuntu-16-laravel-application application-scheduler
 #
 
-if [ -z "$1" ]; then
+if [[ -z "$1" ]]; then
     # No command line arguments ... assume being called as docker run argument
     application-component-enable scheduler
     exec /init/supervisord
