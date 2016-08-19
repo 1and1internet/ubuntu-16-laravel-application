@@ -17,6 +17,10 @@ elif [[ "$COMPONENT" = "web" ]]; then
     rm -f /etc/supervisor/conf.d/nginx.conf
     rm -f /etc/supervisor/conf.d/php-fpm.conf
 
+elif [[ "$COMPONENT" = "migrator" ]]; then
+    echo "Disabling application migrator component"
+    rm -f /hooks/entrypoint-pre.d/05_laravel_wait_for_db_migrations.sh
+
 else
     echo "Disabling application ${COMPONENT} component"
     rm -f /etc/supervisor/conf.d/${COMPONENT}.conf
