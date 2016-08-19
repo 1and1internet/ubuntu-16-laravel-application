@@ -16,7 +16,7 @@ if [[ "$COMPONENT" = "all" ]]; then
     popd >> /dev/null
 
 elif [[ "$COMPONENT" = "web" ]]; then
-    if [[ ! -e /etc/supervisor/conf.d.template/logs.conf ]] or [[ ! -e /etc/supervisor/conf.d.template/nginx.conf ]]; then
+    if [[ ! -e /etc/supervisor/conf.d.template/logs.conf ]] || [[ ! -e /etc/supervisor/conf.d.template/nginx.conf ]]; then
         echo "Not able to enable non existent application component web - maybe it was removed?"
         exit 3
     fi
