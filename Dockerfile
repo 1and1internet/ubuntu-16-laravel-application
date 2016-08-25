@@ -11,6 +11,7 @@ RUN \
     apt-get update -q && \
     apt-get install -q -o Dpkg::Options::=--force-confdef -y php7.0-bcmath php7.0-gmp php7.0-json php7.0-ldap php7.0-recode php7.0-pspell php7.0-soap php7.0-bz2 && \
     apt-get install -q -o Dpkg::Options::=--force-confdef -y sqlite3 libmysqlclient-dev mysql-common mysql-client && \
+    apt-get install -q -o Dpkg::Options::=--force-confdef -y ca-certificates openssl-blacklist ssl-cert apache2-utils python-pip && \
     apt-get autoremove -q -y && \
     apt-get clean -q -y && \
     rm -rf /var/lib/apt/lists/* && \
