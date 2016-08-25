@@ -42,6 +42,7 @@ RUN \
     touch /var/www/html/storage/logs/laravel.log && \
     chmod 666 /var/www/html/storage/logs/laravel.log && \
     rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php && \
+    chmod 666 /etc/nginx/sites-enabled/* /etc/passwd /etc/group && \
     application-set-file-permissions
 WORKDIR /var/www/html
 CMD ["application-all"]
