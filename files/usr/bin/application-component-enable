@@ -11,7 +11,7 @@ if [[ "$COMPONENT" = "all" ]]; then
     echo "Enabling all application components"
     pushd /etc/supervisor/conf.d.template/ >> /dev/null
     for FILENAME in *.conf; do 
-        ln -s /etc/supervisor/conf.d.template/${FILENAME} /etc/supervisor/conf.d/${FILENAME}
+        ln -fs /etc/supervisor/conf.d.template/${FILENAME} /etc/supervisor/conf.d/${FILENAME}
     done
     popd >> /dev/null
 
@@ -21,9 +21,9 @@ elif [[ "$COMPONENT" = "web" ]]; then
         exit 3
     fi
     echo "Enabling application web component"
-    ln -s /etc/supervisor/conf.d.template/logs.conf /etc/supervisor/conf.d/logs.conf 
-    ln -s /etc/supervisor/conf.d.template/nginx.conf /etc/supervisor/conf.d/nginx.conf
-    ln -s /etc/supervisor/conf.d.template/php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
+    ln -fs /etc/supervisor/conf.d.template/logs.conf /etc/supervisor/conf.d/logs.conf 
+    ln -fs /etc/supervisor/conf.d.template/nginx.conf /etc/supervisor/conf.d/nginx.conf
+    ln -fs /etc/supervisor/conf.d.template/php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
 
 else
     if [[ ! -e /etc/supervisor/conf.d.template/${COMPONENT}.conf ]]; then
@@ -31,6 +31,6 @@ else
         exit 3
     fi
     echo "Enabling application ${COMPONENT} component"
-    ln -s /etc/supervisor/conf.d.template/${COMPONENT}.conf /etc/supervisor/conf.d/${COMPONENT}.conf
+    ln -fs /etc/supervisor/conf.d.template/${COMPONENT}.conf /etc/supervisor/conf.d/${COMPONENT}.conf
 
 fi
