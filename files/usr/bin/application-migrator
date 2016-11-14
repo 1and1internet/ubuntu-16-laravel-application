@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Stop on error
+set -e
+
 echo "Application Migrator"
 #
 # To run just the application migrator in its own container use

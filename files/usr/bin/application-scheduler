@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Stop on error
+set -e
+
 echo "Application Scheduler"
 #
 # To run just the application scheduler in its own container use

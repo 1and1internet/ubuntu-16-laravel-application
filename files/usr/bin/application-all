@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Stop on error
+set -e
+
 echo "Application All In One"
 #
 # To run everything in a single container you don't need to specify anything

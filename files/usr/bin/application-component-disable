@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Stop on error
+set -e
+
 COMPONENT=$1
 
 if [[ -z "$COMPONENT" ]]; then

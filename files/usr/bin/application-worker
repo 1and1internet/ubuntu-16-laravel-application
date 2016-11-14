@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Stop on error
+set -e
+
 echo "Application Worker"
 #
 # To run just the application worker in its own container use

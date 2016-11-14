@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Stop on error
+set -e
+
 echo "Application Web Interface"
 #
 # To run just the application web interface in its own container use
