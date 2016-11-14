@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+#
+# To handle the scenario where a container is restarted, we disable
+#  all the components during startup. They will then be enabled again
+#  if they are wanted.
+#
+
+application-component-disable all
