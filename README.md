@@ -1,8 +1,8 @@
-# Laravel 5 Application Base on Ubuntu 16 PHP 7.0
+# Laravel 5 Application Base on Ubuntu 16 PHP 7.1
 
 **_Current Status: Work In Progress_**
 
-A Docker image to use as a basis for Docker contained Laravel 5 applications based on PHP 7.0, which will be running under OpenShift.
+A Docker image to use as a basis for Docker contained Laravel 5 applications based on PHP 7.1, which will be running under OpenShift.
 
 * Laravel is a PHP based web application framework: https://laravel.com/
 * PHP is a scripting language for web development: http://php.net/
@@ -17,7 +17,7 @@ A Docker image to use as a basis for Docker contained Laravel 5 applications bas
 
 	Basic example:
 	```
-	FROM astrolox/ubuntu-16-laravel-application
+	FROM 1and1internet/ubuntu-16-laravel-application
 	COPY src/ ./
 	RUN \
 		composer install \
@@ -32,7 +32,7 @@ A Docker image to use as a basis for Docker contained Laravel 5 applications bas
 
 	A more complex example of what you might want your Dockerfile to look like:
 	```
-	FROM astrolox/ubuntu-16-laravel-application
+	FROM 1and1internet/ubuntu-16-laravel-application
 	# Copy in various additional required files (like init scripts).
 	COPY files /
 	# Install dependencies via composer (these don't change often during development)

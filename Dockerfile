@@ -1,4 +1,4 @@
-FROM 1and1internet/ubuntu-16-nginx-php-7.0
+FROM 1and1internet/ubuntu-16-nginx-php-7.1
 MAINTAINER brian.wojtczak@1and1.co.uk
 ARG DEBIAN_FRONTEND=noninteractive
 COPY files /
@@ -9,7 +9,7 @@ ENV \
     WAIT_FOR_DB_MIGRATIONS=prompt
 RUN \
     apt-get update -q && \
-    apt-get install -q -o Dpkg::Options::=--force-confdef -y php7.0-bcmath php7.0-gmp php7.0-json php7.0-ldap php7.0-recode php7.0-pspell php7.0-soap php7.0-bz2 && \
+    apt-get install -q -o Dpkg::Options::=--force-confdef -y php7.1-bcmath php7.1-gmp php7.1-json php7.1-ldap php7.1-recode php7.1-pspell php7.1-soap php7.1-bz2 && \
     apt-get install -q -o Dpkg::Options::=--force-confdef -y sqlite3 libmysqlclient-dev mysql-common mysql-client && \
     apt-get install -q -o Dpkg::Options::=--force-confdef -y ca-certificates openssl-blacklist ssl-cert apache2-utils python-pip && \
     apt-get autoremove -q -y && \
@@ -19,12 +19,12 @@ RUN \
     rm -rf /var/www && \
     rm -rf /var/log/nginx/*.log && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stdout /var/log/php7.0-fpm.log && \
+    ln -sf /dev/stdout /var/log/php7.1-fpm.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     sed -i -e 's/access_log .*;$/access_log \/var\/log\/nginx\/access\.log;/g' /etc/nginx/sites-enabled/site.conf && \
     sed -i -e 's/error_log .*;$/error_log stderr;/g' /etc/nginx/sites-enabled/site.conf && \
-    chmod 666 /var/log/php7.0-fpm.log /var/log/nginx/*.log && \
-    sed -i -e 's/;clear_env = no/clear_env = no/g' /etc/php/7.0/fpm/pool.d/*.conf && \
+    chmod 666 /var/log/php7.1-fpm.log /var/log/nginx/*.log && \
+    sed -i -e 's/;clear_env = no/clear_env = no/g' /etc/php/7.1/fpm/pool.d/*.conf && \
     mv /etc/supervisor/conf.d /etc/supervisor/conf.d.template && \
     mkdir -p /etc/supervisor/conf.d && \
     chmod -R 777 /etc/supervisor/conf* && \
