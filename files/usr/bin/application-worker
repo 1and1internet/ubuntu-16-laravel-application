@@ -9,7 +9,7 @@ echo "Application Worker"
 # $ docker run ubuntu-16-laravel-application application-worker
 #
 
-if [ -z "$APP_WORKER_QUEUES" ]; then
+if [ -z "$APP_WORKER_QUEUES" ] && [ -z "$APP_WORKER_COMMAND" ]; then
     echo "Application worker queues not specified"
     exit 1
 fi
@@ -22,6 +22,23 @@ if [ -z "$1" ]; then
 else
     # Has command line arguments ... assume being called from supervisord
 
+    WORKER_ARGS=""
+
+    if [ ! -z "${APP_WORKER_COMMAND}" ]; then
+        WORKER_CMD="${APP_WORKER_COMMAND}";
+    else
+        WORKER_CMD="queue:listen"
+    fi
+
+    if [ ! -z "${APP_WORKER_TIMEOUT}" ] && [ "${WORKER_CMD}" == "queue:listen" ]; then
+        WORKER_ARGS="${WORKER_ARGS} --timeout=${APP_WORKER_TIMEOUT}"
+    fi
+
+    if [ ! -z "${APP_WORKER_QUEUES}" ] && [ "${WORKER_CMD}" == "queue:listen" ]; then
+        WORKER_ARGS="${WORKER_ARGS} --queue=${APP_WORKER_QUEUES}"
+    fi
+
+
     # Execute our queue worker
-    exec php artisan queue:listen -v --timeout=${APP_WORKER_TIMEOUT} --queue=${APP_WORKER_QUEUES}
+    exec php artisan ${WORKER_CMD} -v ${WORKER_ARGS} "${@:2}"
 fi
