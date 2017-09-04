@@ -27,14 +27,14 @@ else
     if [ ! -z "${APP_WORKER_COMMAND}" ]; then
         WORKER_CMD="${APP_WORKER_COMMAND}";
     else
-        WORKER_CMD="queue:work"
+        WORKER_CMD="queue:listen"
     fi
 
-    if [ ! -z "${APP_WORKER_TIMEOUT}" ] && [ "${WORKER_CMD}" == "queue:work" ]; then
+    if [ ! -z "${APP_WORKER_TIMEOUT}" ] && [ "${WORKER_CMD}" == "queue:listen" ]; then
         WORKER_ARGS="${WORKER_ARGS} --timeout=${APP_WORKER_TIMEOUT}"
     fi
 
-    if [ ! -z "${APP_WORKER_QUEUES}" ] && [ "${WORKER_CMD}" == "queue:work" ]; then
+    if [ ! -z "${APP_WORKER_QUEUES}" ] && [ "${WORKER_CMD}" == "queue:listen" ]; then
         WORKER_ARGS="${WORKER_ARGS} --queue=${APP_WORKER_QUEUES}"
     fi
 
