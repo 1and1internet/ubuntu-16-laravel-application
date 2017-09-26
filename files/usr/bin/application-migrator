@@ -42,5 +42,26 @@ php artisan --no-ansi --no-interaction migrate:status
 echo ""
 echo ""
 
+# Run the DB Seeders if needed.
+# Seeders should be idempotent as they will run on every deployment
+if [ ! -z "${APP_MIGRATOR_SEED}" ]; then
+
+	SEEDER_ARGS="--force"
+
+	if [ ! -z "${APP_MIGRATOR_SEED_CLASS}" ]; then
+		SEEDER_ARGS="${SEEDER_ARGS} --class=${APP_MIGRATOR_SEED_CLASS}"
+	else
+		SEEDER_ARGS="${SEEDER_ARGS} --class=DatabaseSeeder"
+	fi
+
+	if [ ! -z "${APP_MIGRATOR_SEED_CONNECTION}" ]; then
+		SEEDER_ARGS="${SEEDER_ARGS} --database=${APP_MIGRATOR_SEED_CONNECTION}"
+	fi
+
+	php artisan --no-ansi --no-interaction db:seed ${SEEDER_ARGS}
+	echo ""
+	echo ""
+fi
+
 # Wait to be told that we need to start again
 exec /init/supervisord
