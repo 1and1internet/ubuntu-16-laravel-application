@@ -2,6 +2,13 @@
 
 echo "Setting application file permissions"
 
+chmod 666 /var/log/php7.1-fpm.log /var/log/nginx/*.log
+chmod -R 777 /etc/supervisor/conf* && \
+chmod -R 755 /hooks/supervisord-pre.d/* && \
+chmod 666 /var/www/html/storage/logs/laravel.log && \
+chmod 666 /etc/nginx/sites-enabled/* /etc/passwd /etc/group
+
+
 # Generic web file permissions
 find /var/www/html/ -type d -exec chmod 755 {} +
 find /var/www/html/ -type d -exec chmod ug+s {} +

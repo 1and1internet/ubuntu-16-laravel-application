@@ -1,5 +1,5 @@
 FROM 1and1internet/ubuntu-16-nginx-php-7.1
-MAINTAINER brian.wojtczak@1and1.co.uk
+MAINTAINER chris.stretton@1and1.co.uk
 ARG DEBIAN_FRONTEND=noninteractive
 COPY files /
 ENV \
@@ -23,27 +23,11 @@ RUN \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     sed -i -e 's/access_log .*;$/access_log \/var\/log\/nginx\/access\.log;/g' /etc/nginx/sites-enabled/site.conf && \
     sed -i -e 's/error_log .*;$/error_log stderr;/g' /etc/nginx/sites-enabled/site.conf && \
-    chmod 666 /var/log/php7.1-fpm.log /var/log/nginx/*.log && \
     sed -i -e 's/;clear_env = no/clear_env = no/g' /etc/php/7.1/fpm/pool.d/*.conf && \
     mv /etc/supervisor/conf.d /etc/supervisor/conf.d.template && \
     mkdir -p /etc/supervisor/conf.d && \
-    chmod -R 777 /etc/supervisor/conf* && \
-    chmod -R 755 /hooks/supervisord-pre.d/* && \
-    mkdir -p /var/www/html && \
-    composer create-project \
-    --no-ansi \
-    --no-dev \
-    --no-interaction \
-    --no-progress \
-    --prefer-dist \
-    laravel/laravel /var/www/html ~5.2.0 && \
-    ln -sf /var/www/html/artisan /usr/bin/artisan && \
-    chmod 755 /var/www/html/artisan && \
-    touch /var/www/html/storage/logs/laravel.log && \
-    chmod 666 /var/www/html/storage/logs/laravel.log && \
-    rm -f /var/www/html/database/migrations/*.php /var/www/html/app/Users.php && \
-    chmod 666 /etc/nginx/sites-enabled/* /etc/passwd /etc/group && \
-    application-set-file-permissions
+    mkdir -p /var/www/html/storage/logs && \
+    mkdir -p /var/www/html/bootstrap/cache && \
+    ln -sf /var/www/html/artisan /usr/bin/artisan
 WORKDIR /var/www/html
 CMD ["application-all"]
-ONBUILD RUN php artisan --no-ansi --no-interaction key:generate
