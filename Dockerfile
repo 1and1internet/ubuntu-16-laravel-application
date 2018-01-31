@@ -28,7 +28,8 @@ RUN \
     mkdir -p /etc/supervisor/conf.d && \
     mkdir -p /var/www/html/storage/logs && \
     mkdir -p /var/www/html/bootstrap/cache && \
-    mkfifo /var/www/html/storage/logs/laravel.log && \
+    rm -f /var/www/html/storage/logs/laravel.log && \
+    ln -sf /proc/1/fd/1 /var/www/html/storage/logs/laravel.log && \
     ln -sf /var/www/html/artisan /usr/bin/artisan
 WORKDIR /var/www/html
 CMD ["application-all"]
