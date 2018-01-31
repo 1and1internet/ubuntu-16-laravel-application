@@ -29,6 +29,8 @@ RUN \
     mkdir -p /var/www/html/storage/logs && \
     mkdir -p /var/www/html/bootstrap/cache && \
     touch /var/www/html/storage/logs/laravel.log && \
+    echo laravel log inode: && \
+    ls -i /var/www/html/storage/logs/laravel.log && \
     ln -sf /var/www/html/artisan /usr/bin/artisan
 WORKDIR /var/www/html
 CMD ["application-all"]
